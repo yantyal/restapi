@@ -6,6 +6,13 @@ app.use(express.json());
 
 const port = 3000;
 
+// CORSを許可する
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:8300'); // 特定のオリジンを許可
+  // res.header('Access-Control-Allow-Origin', '*'); // すべてのオリジンを許可
+  next();
+});
+
 app.get('/items/:filename', (req, res) => {
     const filename = req.params.filename;
     const ext = path.extname(filename);
